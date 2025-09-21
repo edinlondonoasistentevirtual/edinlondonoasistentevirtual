@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edin Londoño - Asistente Virtual | Servicios Profesionales</title>
     <meta name="description" content="Edin Londoño - Asistente Virtual profesional especializado en gestión de email, atención al cliente y organización de agenda. Servicios desde $4 USD/hora.">
-    <meta name="keywords" content="asistente virtual, gestión email, atención cliente, organización agenda, colombia">
+    <meta name="keywords" content="asistente virtual, gestión email, atención cliente, organización agenda, colombia, edin londoño">
+    <meta name="author" content="Edin Londoño">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
@@ -14,6 +15,7 @@
         .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
         .card-hover { transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .card-hover:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
+        .clickable { cursor: pointer; }
     </style>
 </head>
 <body class="bg-gray-50 min-h-screen">
@@ -29,7 +31,7 @@
                 Especializado en gestión administrativa y atención al cliente.
             </p>
             <div class="mt-8">
-                <button class="bg-white text-purple-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition duration-300 shadow-lg">
+                <button id="contactBtn" class="bg-white text-purple-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition duration-300 shadow-lg">
                     Contactar Ahora
                 </button>
             </div>
@@ -192,21 +194,21 @@
             </p>
             
             <div class="grid md:grid-cols-2 gap-8 max-w-2xl mx-auto mb-12">
-                <div class="flex items-center justify-center space-x-3">
+                <div class="flex items-center justify-center space-x-3 clickable" onclick="sendEmail()">
                     <i data-lucide="mail" class="w-6 h-6"></i>
                     <span>edin.gomez63@gmail.com</span>
                 </div>
-                <div class="flex items-center justify-center space-x-3">
+                <div class="flex items-center justify-center space-x-3 clickable" onclick="sendWhatsApp()">
                     <i data-lucide="message-circle" class="w-6 h-6"></i>
                     <span>WhatsApp: +57 301 220 8096</span>
                 </div>
             </div>
             
             <div class="space-x-4">
-                <button class="bg-white text-purple-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition duration-300">
+                <button id="emailBtn" class="bg-white text-purple-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition duration-300">
                     Enviar Email
                 </button>
-                <button class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-purple-600 transition duration-300">
+                <button id="whatsappBtn" class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-purple-600 transition duration-300">
                     Contactar por WhatsApp
                 </button>
             </div>
@@ -225,25 +227,20 @@
         // Initialize Lucide icons
         lucide.createIcons();
         
-        // Add click handlers for buttons
-        document.querySelectorAll('button').forEach(button => {
-            button.addEventListener('click', function() {
-                if (this.textContent.includes('Contactar') || this.textContent.includes('Mensaje')) {
-                    window.open('mailto:edin.gomez63@gmail.com?subject=Consulta sobre servicios de asistente virtual', '_blank');
-                } else if (this.textContent.includes('Llamada')) {
-                    window.open('https://wa.me/573012208096?text=Hola%20Edin,%20me%20interesa%20conocer%20m%C3%A1s%20sobre%20tus%20servicios%20como%20asistente%20virtual', '_blank');
-                }
-            });
-        });
+        // Email function
+        function sendEmail() {
+            window.open('mailto:edin.gomez63@gmail.com?subject=Consulta sobre servicios de asistente virtual&body=Hola Edin,%0D%0A%0D%0AMe interesa conocer más sobre tus servicios como asistente virtual.%0D%0A%0D%0AGracias.', '_blank');
+        }
         
-        // Add WhatsApp click handler for contact section
-        document.addEventListener('click', function(e) {
-            if (e.target.textContent && e.target.textContent.includes('WhatsApp:')) {
-                window.open('https://wa.me/573012208096?text=Hola%20Edin,%20me%20interesa%20conocer%20m%C3%A1s%20sobre%20tus%20servicios%20como%20asistente%20virtual', '_blank');
-            }
-        });
+        // WhatsApp function
+        function sendWhatsApp() {
+            window.open('https://wa.me/573012208096?text=Hola%20Edin,%20me%20interesa%20conocer%20m%C3%A1s%20sobre%20tus%20servicios%20como%20asistente%20virtual', '_blank');
+        }
+        
+        // Button event listeners
+        document.getElementById('contactBtn').addEventListener('click', sendEmail);
+        document.getElementById('emailBtn').addEventListener('click', sendEmail);
+        document.getElementById('whatsappBtn').addEventListener('click', sendWhatsApp);
     </script>
 </body>
 </html>
-
-
